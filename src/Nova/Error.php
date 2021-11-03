@@ -4,7 +4,7 @@ namespace JustBetter\LaravelNovaErrorLogger\Nova;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\{Code, Line, Stack, Text};
+use Laravel\Nova\Fields\{Code, Line, Stack, Text, Textarea};
 use JustBetter\LaravelErrorLogger\Models\Error as ErrorModel;
 use Laravel\Nova\Resource;
 
@@ -17,6 +17,7 @@ class Error extends Resource
     public static $search = [
         'group',
         'message',
+        'details',
         'trace',
     ];
 
@@ -34,6 +35,8 @@ class Error extends Resource
                     ->displayUsing(fn(Carbon $carbon): string => $carbon->format('d-m-Y H:i:s'))
                     ->asSmall(),
             ]),
+
+            Textarea::make(__('Details'), 'details'),
         ];
 
         if (optional($this->model())->hasTrace()) {
