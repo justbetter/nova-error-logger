@@ -28,6 +28,8 @@ class Error extends Resource
 
             Text::make(__('Message'), 'message'),
 
+            Text::make(__('Code'), 'code'),
+
             Stack::make(__('Created At'), [
                 Line::make(__('Created At'), 'created_at')
                     ->displayUsing(fn(Carbon $carbon): string => $carbon->diffForHumans()),
