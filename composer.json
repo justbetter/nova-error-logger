@@ -32,7 +32,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "JustBetter\\LaravelNovaErrorLogger\\ServiceProvider"
+        "JustBetter\\NovaErrorLogger\\ServiceProvider"
       ]
     }
   },
