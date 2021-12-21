@@ -1,9 +1,9 @@
 {
-  "name": "just-better/laravel-nova-error-logger",
+  "name": "justbetter/nova-error-logger",
   "description": "Laravel Nova integration for Laravel Error Logger.",
   "require": {
-    "php": "^7.4|^8.0",
-    "just-better/laravel-error-logger": "*",
+    "php": "^8.0",
+    "justbetter/laravel-error-logger": "^2.0",
     "laravel/framework": "*",
     "laravel/nova": "*"
   },
@@ -17,7 +17,7 @@
   "type": "laravel-package",
   "autoload": {
     "psr-4": {
-      "JustBetter\\LaravelNovaErrorLogger\\": "src"
+      "JustBetter\\NovaErrorLogger\\": "src"
     }
   },
   "config": {

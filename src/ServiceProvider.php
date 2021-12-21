@@ -1,9 +1,9 @@
 <?php
 
-namespace JustBetter\LaravelNovaErrorLogger;
+namespace JustBetter\NovaErrorLogger;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use JustBetter\LaravelNovaErrorLogger\Nova\Error;
+use JustBetter\NovaErrorLogger\Nova\Error;
 use Laravel\Nova\Nova;
 
 class ServiceProvider extends BaseServiceProvider

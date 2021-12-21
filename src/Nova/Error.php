@@ -1,11 +1,11 @@
 <?php
 
-namespace JustBetter\LaravelNovaErrorLogger\Nova;
+namespace JustBetter\NovaErrorLogger\Nova;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\{Code, Line, Stack, Text, Textarea};
-use JustBetter\LaravelErrorLogger\Models\Error as ErrorModel;
+use JustBetter\ErrorLogger\Models\Error as ErrorModel;
 use Laravel\Nova\Resource;
 
 class Error extends Resource
