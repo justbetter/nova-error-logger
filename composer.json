@@ -3,7 +3,7 @@
   "description": "Laravel Nova integration for Laravel Error Logger.",
   "require": {
     "php": "^8.0",
-    "justbetter/laravel-error-logger": "dev-feature/improvements",
+    "justbetter/laravel-error-logger": "^2.2",
     "laravel/framework": "*",
     "laravel/nova": "*",
     "marshmallow/nova-date-range-filter": "*"
