@@ -14,9 +14,7 @@ class ShowHidden extends Filter
     /** @param Builder $query */
     public function apply(Request $request, $query, $value)
     {
-        ray($value);
-        return $query
-            ->where('show_on_index', $value);
+        return $query->where('show_on_index', $value);
     }
 
     public function options(Request $request)
