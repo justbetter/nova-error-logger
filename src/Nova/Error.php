@@ -49,6 +49,23 @@ class Error extends Resource
         return $fields;
     }
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if ($request->viaResource() !== null) {
+            return $query;
+        }
+
+        $query->when(empty($request->get('orderBy')), function (Builder $q) {
+            $q->getQuery()->orders = [];
+
+            return $q->orderByDesc('updated_at');
+        });
+
+        $query->when(collect($query->getQuery()->wheres)->where('column', 'show_on_index')->isEmpty(), function (Builder $q) {
+            return $q->where('show_on_index', true);
+        });
+    }
+
     public static function authorizedToCreate(Request $request): bool
     {
         return false;
