@@ -13,7 +13,7 @@ class ServiceProvider extends BaseServiceProvider
         $this->bootNova();
     }
 
-    protected function bootNova(): self
+    protected function bootNova(): static
     {
         Nova::resources([
             Error::class,
