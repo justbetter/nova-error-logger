@@ -4,7 +4,6 @@ namespace JustBetter\NovaErrorLogger\Nova\Metrics;
 
 use Illuminate\Http\Request;
 use JustBetter\ErrorLogger\Models\Error;
-use Laravel\Nova\Metrics\Partition;
 use Laravel\Nova\Metrics\Trend;
 use Laravel\Nova\Metrics\TrendResult;
 

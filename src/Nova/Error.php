@@ -5,7 +5,12 @@ namespace JustBetter\NovaErrorLogger\Nova;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\{Badge, Code, Line, Number, Stack, Text, Textarea};
+use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\Line;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Illuminate\Support\Str;
 use JustBetter\ErrorLogger\Models\Error as ErrorModel;
 use JustBetter\NovaErrorLogger\Nova\Actions\Truncate;
@@ -37,7 +42,8 @@ class Error extends Resource
         $fields = [
             Text::make(__('Group'), 'group'),
 
-            Text::make(__('Message'), 'message')->onlyOnDetail(),
+            Text::make(__('Message'), 'message')
+                ->onlyOnDetail(),
 
             Line::make(__('Message'), 'message')
                 ->displayUsing(fn($msg) => Str::limit($msg, 80)),
@@ -45,19 +51,25 @@ class Error extends Resource
             Text::make(__('Code'), 'code'),
 
             Stack::make(__('First appeared'), [
+
                 Line::make(__('Created At'), 'created_at')
                     ->displayUsing(fn(Carbon $carbon): string => $carbon->diffForHumans()),
+
                 Line::make(__('Created At'), 'created_at')
                     ->displayUsing(fn(Carbon $carbon): string => $carbon->format('d-m-Y H:i:s'))
                     ->asSmall()
+
             ]),
 
             Stack::make(__('Last appeared'), [
+
                 Line::make(__('Updated At'), 'updated_at')
                     ->displayUsing(fn(Carbon $carbon): string => $carbon->diffForHumans()),
+
                 Line::make(__('Updated At'), 'updated_at')
                     ->displayUsing(fn(Carbon $carbon): string => $carbon->format('d-m-Y H:i:s'))
                     ->asSmall()
+
             ]),
 
             Number::make(__('Count'), 'count')

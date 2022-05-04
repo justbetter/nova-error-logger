@@ -15,7 +15,8 @@ use Laravel\Nova\Fields\Text;
 
 class Truncate extends DestructiveAction
 {
-    use InteractsWithQueue, Queueable;
+    use InteractsWithQueue;
+    use Queueable;
 
     public $standalone = true;
     public $confirmButtonText = 'Truncate';
@@ -56,12 +57,14 @@ class Truncate extends DestructiveAction
             ->mapWithKeys(fn($e) => [$e->group => $e->group]);
 
         return [
-            Select::make('By Group', 'group')->options($groups),
+            Select::make('By Group', 'group')
+                ->options($groups),
+
             Text::make('Message contains', 'message_contains'),
 
             DateTime::make('Older than', 'older'),
+
             DateTime::make('Newer than', 'newer'),
         ];
     }
-
 }
