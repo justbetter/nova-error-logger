@@ -3,6 +3,7 @@
 namespace JustBetter\NovaErrorLogger\Nova;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Line;
@@ -85,12 +86,12 @@ class Error extends Resource
         return $query;
     }
 
-    public static function authorizedToCreate(NovaRequest $request): bool
+    public static function authorizedToCreate(Request $request): bool
     {
         return false;
     }
 
-    public function authorizedToUpdate(NovaRequest $request): bool
+    public function authorizedToUpdate(Request $request): bool
     {
         return false;
     }
