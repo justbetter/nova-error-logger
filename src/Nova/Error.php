@@ -2,17 +2,14 @@
 
 namespace JustBetter\NovaErrorLogger\Nova;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Line;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Illuminate\Support\Str;
-use JustBetter\ErrorLogger\Models\Error as ErrorModel;
 use JustBetter\NovaErrorLogger\Nova\Actions\Truncate;
 use JustBetter\NovaErrorLogger\Nova\Filters\GroupFilter;
 use JustBetter\NovaErrorLogger\Nova\Filters\ShowHidden;
@@ -22,11 +19,10 @@ use JustBetter\NovaErrorLogger\Nova\Metrics\UpdatedErrorsPerDay;
 use JustBetter\NovaErrorLogger\Nova\Metrics\UpdatedErrorsPerHour;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
-use Marshmallow\Filters\DateRangeFilter;
 
 class Error extends Resource
 {
-    public static $model = ErrorModel::class;
+    public static $model = \JustBetter\ErrorLogger\Models\Error::class;
 
     public static $title = 'message';
 
@@ -37,7 +33,7 @@ class Error extends Resource
         'trace',
     ];
 
-    public function fields(Request $request): array
+    public function fields(NovaRequest $request): array
     {
         $fields = [
             Text::make(__('Group'), 'group'),
@@ -50,27 +46,11 @@ class Error extends Resource
 
             Text::make(__('Code'), 'code'),
 
-            Stack::make(__('First appeared'), [
+            DateTime::make(__('First appeared'), 'created_at')
+                ->filterable(),
 
-                Line::make(__('Created At'), 'created_at')
-                    ->displayUsing(fn(Carbon $carbon): string => $carbon->diffForHumans()),
-
-                Line::make(__('Created At'), 'created_at')
-                    ->displayUsing(fn(Carbon $carbon): string => $carbon->format('d-m-Y H:i:s'))
-                    ->asSmall()
-
-            ]),
-
-            Stack::make(__('Last appeared'), [
-
-                Line::make(__('Updated At'), 'updated_at')
-                    ->displayUsing(fn(Carbon $carbon): string => $carbon->diffForHumans()),
-
-                Line::make(__('Updated At'), 'updated_at')
-                    ->displayUsing(fn(Carbon $carbon): string => $carbon->format('d-m-Y H:i:s'))
-                    ->asSmall()
-
-            ]),
+            DateTime::make(__('Last appeared'), 'updated_at')
+                ->filterable(),
 
             Number::make(__('Count'), 'count')
                 ->sortable(),
@@ -86,7 +66,7 @@ class Error extends Resource
         return $fields;
     }
 
-    public static function indexQuery(NovaRequest $request, $query)
+    public static function indexQuery(NovaRequest $request, $query): Builder
     {
         if ($request->viaResource() !== null) {
             return $query;
@@ -101,26 +81,28 @@ class Error extends Resource
         $query->when(collect($query->getQuery()->wheres)->where('column', 'show_on_index')->isEmpty(), function (Builder $q) {
             return $q->where('show_on_index', true);
         });
+
+        return $query;
     }
 
-    public static function authorizedToCreate(Request $request): bool
+    public static function authorizedToCreate(NovaRequest $request): bool
     {
         return false;
     }
 
-    public function authorizedToUpdate(Request $request): bool
+    public function authorizedToUpdate(NovaRequest $request): bool
     {
         return false;
     }
 
-    public function actions(Request $request): array
+    public function actions(NovaRequest $request): array
     {
         return [
             new Truncate
         ];
     }
 
-    public function cards(Request $request): array
+    public function cards(NovaRequest $request): array
     {
         return [
             new UpdatedErrorsPerDay,
@@ -130,13 +112,11 @@ class Error extends Resource
         ];
     }
 
-    public function filters(Request $request): array
+    public function filters(NovaRequest $request): array
     {
         return [
             new GroupFilter,
             new ShowHidden,
-            (new DateRangeFilter('updated_at', 'Updated date'))->enableTime(),
-            (new DateRangeFilter('created_at', 'Created date'))->enableTime(),
         ];
     }
 }

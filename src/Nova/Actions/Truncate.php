@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Truncate extends DestructiveAction
 {
@@ -48,7 +49,7 @@ class Truncate extends DestructiveAction
         return Action::message("Deleted $count items");
     }
 
-    public function fields(): array
+    public function fields(NovaRequest $request): array
     {
         $groups = Error::query()
             ->select('group')

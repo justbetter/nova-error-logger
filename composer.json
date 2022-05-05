@@ -5,8 +5,7 @@
         "php": "^8.0",
         "justbetter/laravel-error-logger": "^2.2",
         "laravel/framework": "^8.0 || ^9.0",
-        "laravel/nova": "^3.0",
-        "marshmallow/nova-date-range-filter": "^1.0"
+        "laravel/nova": "^4.0"
     },
     "authors": [
         {
