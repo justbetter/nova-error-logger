@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/nova-error-logger/compare/4.1.0...main)
+[Unreleased changes](https://github.com/justbetter/nova-error-logger/compare/4.1.1...main)
+## [4.1.1](https://github.com/justbetter/nova-error-logger/releases/tag/4.1.1) - 2023-06-15
+
+* Use Nova's ActionResponse
+
+**Full Changelog**: https://github.com/justbetter/nova-error-logger/compare/4.1.0...4.1.1
+
 ## [4.1.0](https://github.com/justbetter/nova-error-logger/releases/tag/4.1.0) - 2023-03-10
 
 ### What's Changed
