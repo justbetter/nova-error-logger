@@ -7,6 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use JustBetter\ErrorLogger\Models\Error;
 use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Actions\ActionResponse;
 use Laravel\Nova\Actions\DestructiveAction;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\DateTime;
@@ -22,7 +23,7 @@ class Truncate extends DestructiveAction
     public $standalone = true;
     public $confirmButtonText = 'Truncate';
 
-    public function handle(ActionFields $fields, Collection $models): array
+    public function handle(ActionFields $fields, Collection $models): ActionResponse
     {
         $query = Error::query();
 
@@ -46,7 +47,7 @@ class Truncate extends DestructiveAction
 
         $query->delete();
 
-        return Action::message("Deleted $count items");
+        return ActionResponse::message("Deleted $count items");
     }
 
     public function fields(NovaRequest $request): array
