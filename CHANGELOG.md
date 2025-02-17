@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/nova-error-logger/compare/4.1.1...main)
+[Unreleased changes](https://github.com/justbetter/nova-error-logger/compare/4.2.0...main)
+## [4.2.0](https://github.com/justbetter/nova-error-logger/releases/tag/4.2.0) - 2025-02-17
+
+### What's Changed
+* Laravel 12 / Nova 5 support by @VincentBean in https://github.com/justbetter/nova-error-logger/pull/5
+
+
+**Full Changelog**: https://github.com/justbetter/nova-error-logger/compare/4.1.1...4.2.0
+
 ## [4.1.1](https://github.com/justbetter/nova-error-logger/releases/tag/4.1.1) - 2023-06-15
 
 * Use Nova's ActionResponse
