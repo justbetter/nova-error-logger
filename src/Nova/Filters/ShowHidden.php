@@ -19,7 +19,7 @@ class ShowHidden extends Filter
     public function options(NovaRequest $request): array
     {
         return [
-            'Show' => false
+            'Show' => false,
         ];
     }
 }

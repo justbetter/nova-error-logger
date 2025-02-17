@@ -10,6 +10,7 @@ use Laravel\Nova\Metrics\TrendResult;
 class UpdatedErrorsPerHour extends Trend
 {
     public $name = 'Errors per Hour';
+
     public $width = '1/4';
 
     public function calculate(NovaRequest $request): TrendResult
@@ -21,7 +22,7 @@ class UpdatedErrorsPerHour extends Trend
     {
         return [
             7 => '7 Days',
-            30 => '30 Days'
+            30 => '30 Days',
         ];
     }
 

@@ -15,7 +15,7 @@ class Hidden extends Partition
     {
         return $this
             ->count($request, Error::class, 'show_on_index')
-            ->label(fn($value) => $value ? 'Yes' : 'No');
+            ->label(fn ($value) => $value ? 'Yes' : 'No');
     }
 
     public function uriKey(): string
