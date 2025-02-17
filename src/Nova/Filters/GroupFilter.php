@@ -24,6 +24,6 @@ class GroupFilter extends Filter
             ->select('group')
             ->distinct()
             ->get()
-            ->mapWithKeys(fn($e) => [$e->group => $e->group]);
+            ->mapWithKeys(fn ($e) => [$e->group => $e->group]);
     }
 }

@@ -4,12 +4,6 @@ namespace JustBetter\NovaErrorLogger\Nova;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Code;
-use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\Line;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 use Illuminate\Support\Str;
 use JustBetter\NovaErrorLogger\Nova\Actions\Truncate;
 use JustBetter\NovaErrorLogger\Nova\Filters\GroupFilter;
@@ -18,6 +12,12 @@ use JustBetter\NovaErrorLogger\Nova\Metrics\Groups;
 use JustBetter\NovaErrorLogger\Nova\Metrics\Hidden;
 use JustBetter\NovaErrorLogger\Nova\Metrics\UpdatedErrorsPerDay;
 use JustBetter\NovaErrorLogger\Nova\Metrics\UpdatedErrorsPerHour;
+use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Line;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
 
@@ -43,7 +43,7 @@ class Error extends Resource
                 ->onlyOnDetail(),
 
             Line::make(__('Message'), 'message')
-                ->displayUsing(fn($msg) => Str::limit($msg, 80)),
+                ->displayUsing(fn ($msg) => Str::limit($msg, 80)),
 
             Text::make(__('Code'), 'code'),
 
@@ -99,7 +99,7 @@ class Error extends Resource
     public function actions(NovaRequest $request): array
     {
         return [
-            new Truncate
+            new Truncate,
         ];
     }
 
@@ -109,7 +109,7 @@ class Error extends Resource
             new UpdatedErrorsPerDay,
             new UpdatedErrorsPerHour,
             new Groups,
-            new Hidden
+            new Hidden,
         ];
     }
 

@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use JustBetter\ErrorLogger\Models\Error;
-use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Actions\ActionResponse;
 use Laravel\Nova\Actions\DestructiveAction;
 use Laravel\Nova\Fields\ActionFields;
@@ -21,6 +20,7 @@ class Truncate extends DestructiveAction
     use Queueable;
 
     public $standalone = true;
+
     public $confirmButtonText = 'Truncate';
 
     public function handle(ActionFields $fields, Collection $models): ActionResponse
@@ -56,7 +56,7 @@ class Truncate extends DestructiveAction
             ->select('group')
             ->distinct()
             ->get()
-            ->mapWithKeys(fn($e) => [$e->group => $e->group]);
+            ->mapWithKeys(fn ($e) => [$e->group => $e->group]);
 
         return [
             Select::make('By Group', 'group')
