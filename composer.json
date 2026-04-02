@@ -4,7 +4,7 @@
     "require": {
         "php": "^8.3",
         "justbetter/laravel-error-logger": "^2.3",
-        "laravel/framework": "^11.0|^12.0",
+        "laravel/framework": "^12.0|^13.0",
         "laravel/nova": "^5.0"
     },
     "authors": [
@@ -52,8 +52,8 @@
         ]
     },
     "require-dev": {
-        "larastan/larastan": "^3.0",
-        "laravel/pint": "^1.20",
-        "orchestra/testbench": "^9.10"
+        "larastan/larastan": "^3.9",
+        "laravel/pint": "^1.29",
+        "orchestra/testbench": "^10.11|^11.0"
     }
 }
