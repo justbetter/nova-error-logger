@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\NovaErrorLogger\Nova\Actions;
 
 use Illuminate\Bus\Queueable;
@@ -32,7 +34,7 @@ class Truncate extends DestructiveAction
         }
 
         if ($fields->offsetExists('message_contains')) {
-            $query->where('message', 'LIKE', "%$fields->message_contains%");
+            $query->where('message', 'LIKE', sprintf('%%%s%%', $fields->message_contains));
         }
 
         if ($fields->offsetExists('older')) {
@@ -47,16 +49,17 @@ class Truncate extends DestructiveAction
 
         $query->delete();
 
-        return ActionResponse::message("Deleted $count items");
+        return ActionResponse::message(sprintf('Deleted %d items', $count));
     }
 
+    #[\Override]
     public function fields(NovaRequest $request): array
     {
         $groups = Error::query()
             ->select('group')
             ->distinct()
             ->get()
-            ->mapWithKeys(fn ($e) => [$e->group => $e->group]);
+            ->mapWithKeys(fn (Error $error): array => [$error->group => $error->group]);
 
         return [
             Select::make('By Group', 'group')

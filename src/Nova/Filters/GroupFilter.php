@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\NovaErrorLogger\Nova\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -18,12 +20,13 @@ class GroupFilter extends Filter
         return $query->where('group', $value);
     }
 
+    #[\Override]
     public function options(NovaRequest $request): Enumerable
     {
         return Error::query()
             ->select('group')
             ->distinct()
             ->get()
-            ->mapWithKeys(fn ($e) => [$e->group => $e->group]);
+            ->mapWithKeys(fn (Error $error): array => [$error->group => $error->group]);
     }
 }

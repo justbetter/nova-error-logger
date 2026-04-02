@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\NovaErrorLogger\Nova\Metrics;
 
 use JustBetter\ErrorLogger\Models\Error;
@@ -16,6 +18,7 @@ class Groups extends Partition
         return $this->count($request, Error::class, 'group');
     }
 
+    #[\Override]
     public function uriKey(): string
     {
         return 'groups';

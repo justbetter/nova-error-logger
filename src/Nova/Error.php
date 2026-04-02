@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\NovaErrorLogger\Nova;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -67,6 +69,7 @@ class Error extends Resource
         return $fields;
     }
 
+    #[\Override]
     public static function indexQuery(NovaRequest $request, $query): Builder
     {
         if ($request->viaResource() !== null) {
@@ -79,23 +82,24 @@ class Error extends Resource
             return $q->orderByDesc('updated_at');
         });
 
-        $query->when(collect($query->getQuery()->wheres)->where('column', 'show_on_index')->isEmpty(), function (Builder $q) {
-            return $q->where('show_on_index', true);
-        });
+        $query->when(collect($query->getQuery()->wheres)->where('column', 'show_on_index')->isEmpty(), fn (Builder $q) => $q->where('show_on_index', true));
 
         return $query;
     }
 
+    #[\Override]
     public static function authorizedToCreate(Request $request): bool
     {
         return false;
     }
 
+    #[\Override]
     public function authorizedToUpdate(Request $request): bool
     {
         return false;
     }
 
+    #[\Override]
     public function actions(NovaRequest $request): array
     {
         return [
@@ -103,6 +107,7 @@ class Error extends Resource
         ];
     }
 
+    #[\Override]
     public function cards(NovaRequest $request): array
     {
         return [
@@ -113,6 +118,7 @@ class Error extends Resource
         ];
     }
 
+    #[\Override]
     public function filters(NovaRequest $request): array
     {
         return [
