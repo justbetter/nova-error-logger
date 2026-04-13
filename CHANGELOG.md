@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/nova-error-logger/compare/4.2.0...main)
+[Unreleased changes](https://github.com/justbetter/nova-error-logger/compare/4.3.0...main)
+## [4.3.0](https://github.com/justbetter/nova-error-logger/releases/tag/4.3.0) - 2026-04-13
+
+### What's Changed
+* Laravel 13 support by @VincentBean in https://github.com/justbetter/nova-error-logger/pull/6
+
+
+**Full Changelog**: https://github.com/justbetter/nova-error-logger/compare/4.2.0...4.3.0
+
 ## [4.2.0](https://github.com/justbetter/nova-error-logger/releases/tag/4.2.0) - 2025-02-17
 
 ### What's Changed
