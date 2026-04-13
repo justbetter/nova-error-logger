@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\NovaErrorLogger\Nova\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -16,6 +18,7 @@ class ShowHidden extends Filter
         return $query->where('show_on_index', $value);
     }
 
+    #[\Override]
     public function options(NovaRequest $request): array
     {
         return [

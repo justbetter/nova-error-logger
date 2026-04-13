@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\NovaErrorLogger\Nova\Metrics;
 
 use JustBetter\ErrorLogger\Models\Error;
@@ -18,6 +20,7 @@ class UpdatedErrorsPerHour extends Trend
         return $this->countByHours($request, Error::class, 'updated_at');
     }
 
+    #[\Override]
     public function ranges(): array
     {
         return [
@@ -26,6 +29,7 @@ class UpdatedErrorsPerHour extends Trend
         ];
     }
 
+    #[\Override]
     public function uriKey(): string
     {
         return 'updated-errors-per-hour';

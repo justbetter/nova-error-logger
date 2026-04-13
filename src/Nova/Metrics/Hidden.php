@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\NovaErrorLogger\Nova\Metrics;
 
 use JustBetter\ErrorLogger\Models\Error;
@@ -15,9 +17,10 @@ class Hidden extends Partition
     {
         return $this
             ->count($request, Error::class, 'show_on_index')
-            ->label(fn ($value) => $value ? 'Yes' : 'No');
+            ->label(fn (int $value): string => $value > 0 ? 'Yes' : 'No');
     }
 
+    #[\Override]
     public function uriKey(): string
     {
         return 'hidden';
